@@ -3,7 +3,6 @@ from flask import Flask, render_template, request , redirect
 # from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///Loaddata.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -19,6 +18,10 @@ class Loaddata(db.Model):
     def __repr__(self) -> str:
         return f"{self.slno} - {self.title}"
 
+@app.before_first_request
+def create_tables():
+    db.create_all()
+    
 @app.route('/', methods = ['GET','POST'])
 
 def hello():
