@@ -30,7 +30,7 @@ def hello():
         db.session.commit()
         
     
-    allld = Loaddata.fiter.all()
+    allld = Loaddata.query.all()
     return render_template("index.html", allld = allld)
 
 @app.route('/delete/<int:slno>')
